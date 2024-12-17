@@ -1,4 +1,4 @@
-name: Deploy Batch Endpoint on Merge to Qua
+name: Deploy Batch Endpoint on Merge to qua
 
 on:
   push:
@@ -36,18 +36,16 @@ jobs:
       - name: Install Azure ML CLI extension
         run: az extension add -n ml --yes
 
+      # Set default values so we do not need to specify them every time
+      - name: Configure defaults
+        run: az configure --defaults group=$AZURE_RESOURCE_GROUP workspace=$AZURE_WORKSPACE_NAME subscription=$AZURE_SUBSCRIPTION_ID
+
       - name: Create or update batch endpoint
-        run: az ml batch-endpoint create --file endpoint.yaml \
-             --resource-group $AZURE_RESOURCE_GROUP \
-             --workspace-name $AZURE_WORKSPACE_NAME
+        run: az ml batch-endpoint create --file endpoint.yaml
 
       - name: Create or update batch deployment
-        run: az ml batch-deployment create --file deployment.yaml \
-             --resource-group $AZURE_RESOURCE_GROUP \
-             --workspace-name $AZURE_WORKSPACE_NAME
+        run: az ml batch-deployment create --file deployment.yaml
 
       - name: Set default deployment
         run: az ml batch-endpoint update --name hello-batch-endpoint \
-             --set defaults.deployment_name=hello-batch-deployment \
-             --resource-group $AZURE_RESOURCE_GROUP \
-             --workspace-name $AZURE_WORKSPACE_NAME
+             --set defaults.deployment_name=hello-batch-deployment
