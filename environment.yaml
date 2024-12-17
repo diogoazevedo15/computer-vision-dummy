@@ -1,0 +1,13 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: hello-env
+image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:latest
+conda_file:
+  name: hello-conda-env
+  channels:
+    - conda-forge
+    - defaults
+  dependencies:
+    - python=3.9
+    - pip=21.0
+    - pip:
+      - azureml-defaults
