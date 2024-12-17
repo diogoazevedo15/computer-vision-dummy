@@ -1,10 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
 name: hello-batch-deployment
 endpoint_name: hello-batch-endpoint
-compute: azureml:cpu-cluster  # Replace with your actual compute cluster name
+compute: azureml:cpu-cluster
 environment: azureml:hello-env@latest
 code_configuration:
   code: .
   scoring_script: score.py
 output_file_name: predictions.txt
-target_consumption_rate_per_node: 1
+
+# Optional recommended fields:
+# mini_batch_size: 10
+# max_concurrency_per_instance: 1
+# resources:
+#   instance_count: 2
