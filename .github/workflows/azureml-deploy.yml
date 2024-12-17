@@ -36,9 +36,12 @@ jobs:
       - name: Install Azure ML CLI extension
         run: az extension add -n ml --yes
 
-      # Set default values so we do not need to specify them every time
       - name: Configure defaults
         run: az configure --defaults group=$AZURE_RESOURCE_GROUP workspace=$AZURE_WORKSPACE_NAME subscription=$AZURE_SUBSCRIPTION_ID
+
+      # Create or update the environment before creating endpoint/deployment
+      - name: Create or update environment
+        run: az ml environment create --file environment.yaml
 
       - name: Create or update batch endpoint
         run: az ml batch-endpoint create --file endpoint.yaml
@@ -47,5 +50,4 @@ jobs:
         run: az ml batch-deployment create --file deployment.yaml
 
       - name: Set default deployment
-        run: az ml batch-endpoint update --name hello-batch-endpoint \
-             --set defaults.deployment_name=hello-batch-deployment
+        run: az ml batch-endpoint update --name hello-batch-endpoint --set defaults.deployment_name=hello-batch-deployment
