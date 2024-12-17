@@ -1,2 +1,2 @@
 def run(mini_batch):
-    return ["Hello world" for _ in mini_batch]
+    return ["Dummy Output" for _ in mini_batch]
