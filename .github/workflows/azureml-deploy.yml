@@ -7,36 +7,47 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
+      AZURE_WORKSPACE_NAME: ${{ secrets.AZURE_WORKSPACE_NAME }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Set subscription
-        run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Login to Azure via Service Principal
+        run: |
+          az login --service-principal \
+            --username $AZURE_CLIENT_ID \
+            --password $AZURE_CLIENT_SECRET \
+            --tenant $AZURE_TENANT_ID
+      
+      - name: Set Azure subscription
+        run: az account set --subscription $AZURE_SUBSCRIPTION_ID
 
       - name: Install Azure ML CLI extension
         run: az extension add -n ml --yes
 
       - name: Create or update batch endpoint
-        run: |
-          az ml batch-endpoint create --file endpoint.yaml \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --workspace-name ${{ secrets.AZURE_WORKSPACE_NAME }}
+        run: az ml batch-endpoint create --file endpoint.yaml \
+             --resource-group $AZURE_RESOURCE_GROUP \
+             --workspace-name $AZURE_WORKSPACE_NAME
 
       - name: Create or update batch deployment
-        run: |
-          az ml batch-deployment create --file deployment.yaml \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --workspace-name ${{ secrets.AZURE_WORKSPACE_NAME }}
+        run: az ml batch-deployment create --file deployment.yaml \
+             --resource-group $AZURE_RESOURCE_GROUP \
+             --workspace-name $AZURE_WORKSPACE_NAME
 
       - name: Set default deployment
-        run: |
-          az ml batch-endpoint update --name hello-batch-endpoint \
-            --set defaults.deployment_name=hello-batch-deployment \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --workspace-name ${{ secrets.AZURE_WORKSPACE_NAME }}
+        run: az ml batch-endpoint update --name hello-batch-endpoint \
+             --set defaults.deployment_name=hello-batch-deployment \
+             --resource-group $AZURE_RESOURCE_GROUP \
+             --workspace-name $AZURE_WORKSPACE_NAME
