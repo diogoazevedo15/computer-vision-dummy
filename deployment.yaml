@@ -8,6 +8,9 @@ code_configuration:
   scoring_script: score.py
 output_file_name: predictions.txt
 
+model:
+  path: .
+
 # Optional recommended fields:
 # mini_batch_size: 10
 # max_concurrency_per_instance: 1
