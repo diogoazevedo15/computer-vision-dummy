@@ -26,10 +26,13 @@ This repository demonstrates how to set up a simple Azure Machine Learning (Azur
 ├── .github
 │   └── workflows
 │       └── azureml-deploy.yml
-├── endpoint.yaml
-├── deployment.yaml
-├── environment.yaml
-└── score.py
+├── deploy
+│   ├── endpoint.yaml
+│   ├── deployment.yaml
+│   ├── environment.yaml
+│   └── score.py
+├── invoke
+│   └── invoke.py
 ```
 
 markdown
@@ -45,21 +48,34 @@ This GitHub Actions workflow is triggered when changes are pushed to the `qua` b
 - Creates or updates the Azure ML environment, batch endpoint, and batch deployment.  
 - Sets the default deployment for the endpoint.
 
-**`endpoint.yaml`**  
+**`deploy/endpoint.yaml`**  
 Defines the Azure ML batch endpoint resource. It specifies the endpoint’s name and authentication mode. The endpoint is a logical concept that provides an entry point for submitting batch inference requests.
 
-**`deployment.yaml`**  
+**`deploy/deployment.yaml`**  
 Defines the batch deployment associated with the endpoint. It includes details such as:  
 - The compute target (where the batch job runs).  
 - The environment (runtime environment with libraries and dependencies).  
 - The scoring script and other code artifacts.  
 - The output file name for inference results.
 
-**`environment.yaml`**  
+**`deploy/environment.yaml`**  
 Specifies the environment for running the batch inference. This includes the Docker base image, Python version, and necessary packages (`azureml-defaults`, etc.). Once created, this environment is referenced in the deployment.
 
-**`score.py`**  
+**`deploy/score.py`**  
 A simple scoring script that defines how the batch job processes input data and generates output predictions. In this example, it just returns a static "Hello world" message or a dummy output, serving as a placeholder for a real model inference logic.
+
+**`invoke/invoke.py`**  
+A simple python script that invokes the batch endpoint deployed.
+To run this scrit add an .env file to this folder with:
+```env
+AZURE_CLIENT_ID=<service-principal-appid>
+AZURE_TENANT_ID=<your-tenant-id>
+AZURE_CLIENT_SECRET=<service-principal-password>
+
+AZURE_SUBSCRIPTION_ID=<your-subscription-id>
+AZURE_RESOURCE_GROUP=<your-resource-group>
+AZURE_WORKSPACE_NAME=<your-workspace-name>
+```
 
 ## GitHub Actions Workflow Overview
 
