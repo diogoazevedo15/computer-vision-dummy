@@ -41,13 +41,13 @@ jobs:
 
       # Create or update the environment before creating endpoint/deployment
       - name: Create or update environment
-        run: az ml environment create --file environment.yaml
+        run: az ml environment create --file deploy/environment.yaml
 
       - name: Create or update batch endpoint
-        run: az ml batch-endpoint create --file endpoint.yaml
+        run: az ml batch-endpoint create --file deploy/endpoint.yaml
 
       - name: Create or update batch deployment
-        run: az ml batch-deployment create --file deployment.yaml
+        run: az ml batch-deployment create --file deploy/deployment.yaml
 
       - name: Set default deployment
         run: az ml batch-endpoint update --name hello-batch-endpoint --set defaults.deployment_name=hello-batch-deployment
