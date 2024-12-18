@@ -1,14 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
 name: hello-batch-deployment
 endpoint_name: hello-batch-endpoint
-compute: azureml:cpu-cluster  # Ensure this compute target exists
+compute: azureml:cpu-cluster
 environment: azureml:hello-env@latest
 code_configuration:
   code: .
   scoring_script: score.py
-inputs:
-  input_data:
-    type: uri_file
+output_file_name: predictions.txt
+
 model:
   path: .
 
