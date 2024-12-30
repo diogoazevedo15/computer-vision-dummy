@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_inference
 display_name: CV Model Inference
-version: 7
+version: 8
 type: command
 inputs:
   input_data_path:
