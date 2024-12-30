@@ -1,11 +1,8 @@
-$schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
-name: cv-batch-deployment
-endpoint_name: cv-batch-endpoint
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponentBatchDeployment.schema.json
+name: cv-deployment-test
+description: Sample deployment.
 type: pipeline
 component: pipeline.yml
 settings:
     continue_on_step_failure: false
     default_compute: cpu-cluster
-
-model:
-  path: .
