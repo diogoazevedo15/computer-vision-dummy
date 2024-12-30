@@ -1,14 +1,13 @@
 import os
 import uuid
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential, ClientSecretCredential
-from azure.ai.ml import MLClient
-from azure.ai.ml import Input
+from azure.identity import ClientSecretCredential
+from azure.ai.ml import MLClient, Input, Output
 
 load_dotenv()
 
-endpoint_name = "cv-batch-endpoint"  # Replace with your endpoint name
-input_data_uri = "https://raw.githubusercontent.com/datasets/covid-19/main/data/countries-aggregated.csv"  # Sample input data
+endpoint_name = "cv-batch-endpoint"
+input_data_uri = "https://raw.githubusercontent.com/datasets/covid-19/main/data/countries-aggregated.csv"
 
 credential = ClientSecretCredential(
     tenant_id=os.getenv("AZURE_TENANT_ID"),
@@ -27,14 +26,22 @@ def invoke_batch_endpoint():
     job_name = f"batch-job-{uuid.uuid4()}"
     print(f"Submitting batch job '{job_name}' to endpoint '{endpoint_name}'...")
 
+    # Define the input data
     input_data = Input(
-        type="uri_file",
-        path=input_data_uri,
+        type="uri_folder",  # Adjusted to uri_folder since component expects a folder
+        path="azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspacefilestore/paths/",  # Directory containing your data
+    )
+
+    # Specify the output location
+    output_data = Output(
+        type="uri_folder",
+        path="azureml://datastores/workspaceblobstore/paths/output_path/"
     )
 
     job = ml_client.batch_endpoints.invoke(
         endpoint_name=endpoint_name,
-        input=input_data,
+        inputs={'input_dir': input_data},
+        outputs={'output_dir': output_data},  # Providing the output mapping
         job_name=job_name
     )
 
