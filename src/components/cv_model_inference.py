@@ -26,5 +26,6 @@ def main():
         validation_output = f.read()
     print(f"Validation output received: {validation_output}")
 
+
 if __name__ == "__main__":
     main()
