@@ -27,14 +27,14 @@ def invoke_batch_endpoint():
     job_name = f"batch-job-{uuid.uuid4()}"
     print(f"Submitting batch job '{job_name}' to endpoint '{endpoint_name}'...")
 
-    input_data = Input(
-        type="uri_file",
-        path=input_data_uri,
-    )
+    # input_data = Input(
+    #     type="uri_file",
+    #     path=input_data_uri,
+    # )
 
     job = ml_client.batch_endpoints.invoke(
         endpoint_name=endpoint_name,
-        input=input_data,
+        # input=input_data,
         job_name=job_name
     )
 

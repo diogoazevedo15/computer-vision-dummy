@@ -71,4 +71,4 @@ jobs:
 
       # Update default deployment
       - name: Set default deployment
-        run: az ml batch-endpoint update --name cv-batch-endpoint --set defaults.deployment_name=cv-batch-deployment
+        run: az ml batch-endpoint update --name cv-batch-endpoint --set defaults.deployment_name=cv-deployment-gitaction
