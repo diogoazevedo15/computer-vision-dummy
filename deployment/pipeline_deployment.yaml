@@ -5,8 +5,7 @@ display_name: CV Pipeline
 experiment_name: cv_experiment
 inputs:
   input_data:
-    # Assuming the data will be provided when the pipeline is run
-    # Alternatively, you can specify a default path here
+
 jobs:
   validation_step:
     type: command
