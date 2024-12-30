@@ -3,4 +3,4 @@ name: cv-batch-deployment
 endpoint_name: cv-batch-endpoint
 model:
   path: .
-compute: cpu_cluster
+compute: cpu-cluster
