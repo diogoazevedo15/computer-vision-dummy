@@ -47,15 +47,22 @@ jobs:
         run: az ml environment create --file deployment/env_inference.yaml
 
       # Create or update components
+
+      # Validation component
       - name: Create or update validation component
         run: az ml component create --file deployment/config_validate.yaml
 
+      # Inference component
       - name: Create or update inference component
         run: az ml component create --file deployment/config_inference.yaml
 
       # Create or update pipeline
       - name: Create or update pipeline
         run: az ml component create --file deployment/pipeline.yaml
+
+      # Create or update batchendpoint
+      - name: Create or update batch endpoint
+        run: az ml batch-endpoint create --file deploy/endpoint.yaml
 
       # Create or update batch deployment
       - name: Create or update batch deployment
