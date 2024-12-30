@@ -13,9 +13,11 @@ outputs:
   validation_output:
     type: uri_folder
     description: "Validation output directory"
+    mode: upload
   inference_output:
     type: uri_folder
     description: "Inference output directory"
+    mode: upload
 
 jobs:
   validation_step:
