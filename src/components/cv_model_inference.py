@@ -1,10 +1,10 @@
-import os
-import argparse
-from utils.functions import utils_fun
-from utils.constants import UTILS_CONST
-from utils.prompts import UTILS_PROMPT
-
 def main():
+    import os
+    import argparse
+    from utils.functions import utils_fun
+    from utils.constants import UTILS_CONST
+    from utils.prompts import UTILS_PROMPT
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_data_path', type=str, required=True)
     parser.add_argument('--output_dir', type=str, required=True)
@@ -12,6 +12,7 @@ def main():
 
     input_data_path = args.input_data_path
     output_dir = args.output_dir
+    os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
 
     print("Running model inference...")
     print(f"Input data path: {input_data_path}")
@@ -19,8 +20,11 @@ def main():
     print(UTILS_PROMPT)
     utils_fun()
 
-    print(f"Output directory: {input_data_path}")
-    print(f"Output directory: {output_dir}")
+    # Read the validation output string from the file
+    input_file = os.path.join(input_data_path, "validation_output.txt")
+    with open(input_file, "r") as f:
+        validation_output = f.read()
+    print(f"Validation output received: {validation_output}")
 
 if __name__ == "__main__":
     main()
