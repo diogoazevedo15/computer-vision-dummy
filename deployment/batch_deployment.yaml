@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
+name: cv-batch-deployment
+endpoint_name: cv-batch-endpoint
+model:
+  name: cv_pipeline
+  version: 1
+compute: your_compute_cluster  # Replace with your compute cluster name
+mini_batch_size: 1
+max_concurrency_per_instance: 1
+error_threshold: -1  # Continue processing even if errors occur
+inputs:
+  input_dir:
+    mode: mount  # or 'download' based on your preference
+outputs:
+  output_dir:
+    mode: upload

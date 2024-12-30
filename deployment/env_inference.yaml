@@ -10,4 +10,3 @@ conda_file:
     - python=3.8
     - pip:
         - azureml-defaults
-        - pandas
