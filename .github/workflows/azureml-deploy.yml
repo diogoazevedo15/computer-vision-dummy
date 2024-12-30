@@ -55,7 +55,7 @@ jobs:
 
       # Create or update pipeline
       - name: Create or update pipeline
-        run: az ml component create --file deployment/pipeline.yaml
+        run: az ml pipelines create --file deployment/pipeline.yaml
 
       # Create or update batch endpoint
       - name: Create or update batch endpoint
