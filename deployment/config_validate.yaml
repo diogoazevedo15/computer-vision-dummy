@@ -1,0 +1,17 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: cv_model_validate
+display_name: CV Model Validation
+version: 1
+type: command
+inputs:
+  input_dir:
+    type: uri_folder
+outputs:
+  output_dir:
+    type: uri_folder
+code: ../src
+environment: azureml:env-validate@latest
+command: >
+  python src/components/cv_model_validate.py
+  --input_dir ${{inputs.input_dir}}
+  --output_dir ${{outputs.output_dir}}

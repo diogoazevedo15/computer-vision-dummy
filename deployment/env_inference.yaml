@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: env-inference
+version: 1
+dependencies:
+  - python=3.8
+  - pip:
+    - azureml-defaults
+    - pandas
