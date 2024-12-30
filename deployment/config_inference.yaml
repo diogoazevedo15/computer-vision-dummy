@@ -5,7 +5,7 @@ version: 2
 type: command
 inputs:
   input_data_path:
-    type: uri_file
+    type: uri_folder
 outputs:
   output_dir:
     type: uri_folder

@@ -18,9 +18,15 @@ jobs:
   validation_step:
     type: command
     component: azureml:cv_model_validate@latest
+    inputs:
+      input_dir: ${{ inputs.input_dir }}
+    outputs:
+      output_dir: validation_output
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
-
-
+    inputs:
+      input_data_path: ${{ jobs.validation_step.outputs.output_dir }}  # Connect output of validation_step
+    outputs:
+      output_dir: ${{ outputs.output_dir }}
