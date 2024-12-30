@@ -55,17 +55,12 @@ jobs:
 
       # Create or update pipeline
       - name: Create or update pipeline
-        run: az ml job create --file deployment/pipeline_deployment.yaml
+        run: az ml pipeline create --file deployment/pipeline.yaml
 
       # Create or update batch endpoint
       - name: Create or update batch endpoint
         run: az ml batch-endpoint create --name cv-batch-endpoint --auth-mode aad_token
 
-      # Create or update batch deployment using the pipeline
+      # Create or update batch deployment
       - name: Create or update batch deployment
-        run: |
-          az ml batch-deployment create \
-            --name cv-batch-deployment \
-            --endpoint-name cv-batch-endpoint \
-            --file deployment/pipeline_deployment.yaml \
-            --set-default
+        run: az ml batch-deployment create --file deployment/batch_deployment.yaml --set-default
