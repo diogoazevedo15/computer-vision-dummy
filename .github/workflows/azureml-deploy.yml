@@ -62,7 +62,7 @@ jobs:
 
       # Create or update batchendpoint
       - name: Create or update batch endpoint
-        run: az ml batch-endpoint create --file deploy/endpoint.yaml
+        run: az ml batch-endpoint create --file deployment/endpoint.yaml
 
       # Create or update batch deployment
       - name: Create or update batch deployment
