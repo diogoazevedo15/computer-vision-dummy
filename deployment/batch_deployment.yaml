@@ -1,8 +1,13 @@
-$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponentBatchDeployment.schema.json
-name: cv-deployment-test
-description: Sample deployment.
-type: pipeline
-component: pipeline.yml
-settings:
-    continue_on_step_failure: false
-    default_compute: cpu-cluster
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineDeployment.schema.json
+name: cv-deployment-gitaction
+endpoint_name: cv-batch-endpoint
+type: pipeline  
+jobs:
+  run_pipeline_component:
+    type: pipeline
+      component: azureml:cv_pipeline@latest
+
+    # inputs:
+    #   input_data: azureml://datastores/myds/paths/my_input_folder
+    # outputs:
+    #   output_data: azureml://datastores/myds/paths/my_output_folder
