@@ -5,7 +5,7 @@ compute: cpu-cluster
 component:
   type: pipeline
   pipeline:
-    name: cv_pipeline  
+    name: azureml:cv_pipeline:@latest
 
 model:
   path: .
