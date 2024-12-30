@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
 name: cv-batch-deployment
-endpoint_name: cv-batch-endpoint
+endpoint_name: hello-batch-endpoint
 model:
   name: cv_pipeline
   version: 1
