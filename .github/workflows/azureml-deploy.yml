@@ -68,6 +68,7 @@ jobs:
       - name: Create or update batch deployment
         run: az ml batch-deployment create --file deployment/batch_deployment.yaml
 
+
       # Update default deployment
       - name: Set default deployment
         run: az ml batch-endpoint update --name cv-batch-endpoint --set defaults.deployment_name=cv-batch-deployment
