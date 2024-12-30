@@ -30,6 +30,6 @@ jobs:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{ jobs.validation_step.outputs.output_dir }}
+      input_data_path: ${{ parent.jobs.validation_step.outputs.output_dir }}
     outputs:
       output_dir: ${{ parent.outputs.output_dir }}
