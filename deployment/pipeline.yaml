@@ -3,13 +3,15 @@ $schema: https://azuremlschemas.azureedge.net/latest/PipelineComponent.schema.js
 type: pipeline
 name: cv_pipeline
 display_name: CV Pipeline
-version: 9
+version: 7
 
+# Component-level inputs
 inputs:
   input_dir:
     type: uri_folder
     description: "Input data directory"
 
+# Component-level outputs
 outputs:
   output_dir:
     type: uri_folder
@@ -22,7 +24,7 @@ jobs:
     inputs:
       input_dir: ${{ parent.inputs.input_dir }}
     outputs:
-      output_dir: validation_output  # Internal binding
+      output_dir:
 
   inference_step:
     type: command
