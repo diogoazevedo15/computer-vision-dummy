@@ -3,7 +3,7 @@ name: cv-deployment-gitaction
 description: Deployment made trough gitactions
 endpoint_name: cv-batch-endpoint
 type: pipeline
-component: azureml:cv_pipeline:2
+component: azureml:cv_pipeline:@latest
 settings:
     continue_on_step_failure: false
     default_compute: cpu-cluster

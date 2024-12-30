@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
 type: pipeline
 name: cv_pipeline
 display_name: CV Pipeline
-version: 2
+version: 3
 
 inputs:
   input_dir:
