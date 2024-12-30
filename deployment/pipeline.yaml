@@ -1,8 +1,8 @@
 # deployment/pipeline.yaml
 $schema: https://azuremlschemas.azureedge.net/latest/PipelineComponent.schema.json
 type: pipeline
-name: cv_pipeline
-display_name: CV Pipeline
+name: cv_pipeline_updated
+display_name: CV Pipeline Updated
 version: 7
 
 # Component-level inputs
