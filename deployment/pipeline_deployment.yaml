@@ -1,0 +1,29 @@
+$schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
+type: pipeline
+name: cv_pipeline
+display_name: CV Pipeline
+version: 1
+experiment_name: cv_experiment
+inputs:
+  input_data:
+    type: uri_folder
+    description: Input data folder
+jobs:
+  validation_step:
+    type: component
+    component: config_validate.yaml
+    inputs:
+      input_dir: ${{inputs.input_data}}
+    outputs:
+      output_dir: validation_output
+  inference_step:
+    type: component
+    component: config_inference.yaml
+    inputs:
+      input_data_path: ${{jobs.validation_step.outputs.output_dir}}/validation_output.txt
+    outputs:
+      output_dir: inference_output
+outputs:
+  inference_results:
+    type: uri_folder
+    value: ${{jobs.inference_step.outputs.output_dir}}
