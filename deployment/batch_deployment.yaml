@@ -6,3 +6,22 @@ component: pipeline.yml
 settings:
     continue_on_step_failure: false
     default_compute: cpu-cluster
+
+
+# pipeline_deployment.yml
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineDeployment.schema.json
+
+name: cv-deployment-action
+endpoint_name: cv-batch-endpoint
+
+type: pipeline
+
+jobs:
+  run_pipeline_component:
+    type: pipeline
+       component: azureml:my-registered-pipeline@1
+
+    # inputs:
+    #   input_data: azureml://datastores/myds/paths/my_input_folder
+    # outputs:
+    #   output_data: azureml://datastores/myds/paths/my_output_folder

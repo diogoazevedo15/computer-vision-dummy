@@ -1,14 +1,16 @@
-$schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
-type: pipeline
-name: cv_pipeline
-display_name: CV Pipeline
-version: 1
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineDeployment.schema.json
+
+name: cv-deployment-gitaction
+endpoint_name: cv-batch-endpoint
+
+type: pipeline  # Indicates we're creating a pipeline deployment
 
 jobs:
-  validation_step:
-    type: command
-    component: azureml:cv_model_validate@latest
+  run_pipeline_component:
+    type: pipeline
+      component: azureml:cv_pipeline@latest
 
-  inference_step:
-    type: command
-    component: azureml:cv_model_inference@latest
+    # inputs:
+    #   input_data: azureml://datastores/myds/paths/my_input_folder
+    # outputs:
+    #   output_data: azureml://datastores/myds/paths/my_output_folder
