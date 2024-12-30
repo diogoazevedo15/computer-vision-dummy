@@ -19,14 +19,14 @@ jobs:
     type: command
     component: azureml:cv_model_validate@latest
     inputs:
-      input_dir: ${{ parent.inputs.input_dir }}
+      input_dir: ${{ inputs.input_dir }}
     outputs:
-      output_dir: parent.outputs.validation_output
+      output_dir: validation_output
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{ parent.jobs.validation_step.outputs.output_dir }}  # Connect validation output
+      input_data_path: ${{ jobs.validation_step.outputs.output_dir }}  # Connect validation output
     outputs:
-      output_dir: ${{ parent.outputs.output_dir }}
+      output_dir: ${{ outputs.output_dir }}
