@@ -1,5 +1,5 @@
 # deployment/pipeline.yaml
-$schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
+$schema: https://azuremlschemas.azureedge.net/latest/PipelineComponent.schema.json
 type: pipeline
 name: cv_pipeline
 display_name: CV Pipeline
@@ -14,23 +14,20 @@ outputs:
   output_dir:
     type: uri_folder
     description: "Output data directory"
-  validation_output:
-    type: uri_folder
-    description: "Validation output directory"
 
 jobs:
   validation_step:
     type: command
     component: azureml:cv_model_validate@latest
     inputs:
-      input_dir: ${{ inputs.input_dir }}
+      input_dir: ${{ parent.inputs.input_dir }}
     outputs:
-      output_dir: ${{ outputs.validation_output }}
+      output_dir: validation_output  # Internal binding
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{ jobs.validation_step.outputs.output_dir }}  # Connect validation output
+      input_data_path: ${{ jobs.validation_step.outputs.output_dir }}
     outputs:
-      output_dir: ${{ outputs.output_dir }}
+      output_dir: ${{ parent.outputs.output_dir }}
