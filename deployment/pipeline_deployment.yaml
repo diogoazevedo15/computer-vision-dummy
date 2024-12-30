@@ -5,22 +5,18 @@ display_name: CV Pipeline
 experiment_name: cv_experiment
 inputs:
   input_data:
-
+    type: uri_folder
+    # Provide a default value or ensure it's provided when submitting the pipeline job.
+    default: azureml://datastores/workspaceblobstore/paths/data/input_data/
 jobs:
   validation_step:
     type: command
     component: azureml:cv_model_validate@latest
     inputs:
-      input_dir: ${{parent.inputs.input_data}}
-    outputs:
-      output_dir: validation_output
+      input_dir: ${{inputs.input_data}}
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{jobs.validation_step.outputs.output_dir}}/validation_output.txt
-    outputs:
-      output_dir: inference_output
-outputs:
-  inference_results:
-    value: ${{jobs.inference_step.outputs.output_dir}}
+      input_data_path: ${{jobs.validation_step.outputs.output_file}}
+    # Outputs can be omitted unless additional properties are needed.
