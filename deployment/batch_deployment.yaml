@@ -1,6 +1,8 @@
 $schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
 name: cv-batch-deployment
 endpoint_name: cv-batch-endpoint
+compute: cpu-cluster
+component: azureml:cv_pipeline@latest
+
 model:
   path: .
-compute: cpu-cluster
