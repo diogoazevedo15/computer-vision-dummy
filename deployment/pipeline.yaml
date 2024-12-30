@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
 type: pipeline
 name: cv_pipeline
 display_name: CV Pipeline
-version: 5
+version: 6
 
 inputs:
   input_dir:
@@ -30,6 +30,6 @@ jobs:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{ parent.jobs.preprocess_job.outputs.validation_output }}  # Use the pipeline output
+      input_data_path: ${{ parent.jobs.validation_step.outputs.validation_output }}  # Use the pipeline output
     outputs:
       output_dir: ${{ parent.outputs.output_dir }}
