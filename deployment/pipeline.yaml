@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/PipelineJob.schema.json
 type: pipeline
 name: cv_pipeline
 display_name: CV Pipeline
-version: 8
+version: 9
 
 inputs:
   input_dir:
@@ -10,14 +10,9 @@ inputs:
     description: "Input data directory"
 
 outputs:
-  validation_output:
+  output_dir:
     type: uri_folder
-    description: "Validation output directory"
-    mode: upload
-  inference_output:
-    type: uri_folder
-    description: "Inference output directory"
-    mode: upload
+    description: "Output data directory"
 
 jobs:
   validation_step:
@@ -26,12 +21,12 @@ jobs:
     inputs:
       input_dir: ${{ parent.inputs.input_dir }}
     outputs:
-      validation_result: ${{ parent.outputs.validation_output }}
+      output_dir: parent.outputs.validation_output
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_data_path: ${{ parent.jobs.validation_step.outputs.validation_result }}
+      input_data_path: ${{ parent.jobs.validation_step.outputs.output_dir }}  # Connect validation output
     outputs:
-      output_dir: ${{ parent.outputs.inference_output }}
+      output_dir: ${{ parent.outputs.output_dir }}
