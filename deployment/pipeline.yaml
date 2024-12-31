@@ -1,9 +1,8 @@
-# deployment/pipeline.yaml
 $schema: https://azuremlschemas.azureedge.net/latest/PipelineComponent.schema.json
 type: pipeline
 name: cv_pipeline_updated
 display_name: CV Pipeline Updated
-version: 9
+version: 10
 
 # Component-level inputs
 inputs:
@@ -24,12 +23,12 @@ jobs:
     inputs:
       input_dir: ${{ parent.inputs.input_dir }}
     outputs:
-      output_dir:
+      output_dir:  # Make sure this is specified if required
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_dir: ${{ parent.jobs.validation_step.outputs.output_dir }}
+      input_dir: ${{ parent.jobs.validation_step.outputs.output_dir }}  # Link output to input
     outputs:
       output_dir: ${{ parent.outputs.output_dir }}

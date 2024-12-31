@@ -19,12 +19,13 @@ def main():
     print(UTILS_PROMPT)
     utils_fun()
 
-    # Write the validation output string to a file
-    validation_output = "Validation Output: Success"
-    output_file = os.path.join(output_dir, "validation_output.txt")
-    with open(output_file, "w") as f:
-        f.write(validation_output)
-    print(f"Validation output written to {output_file}")
+    # Define the output string
+    output_string = "Model validation completed successfully."
+
+    # Write the string to a file in the output directory
+    output_file_path = os.path.join(output_dir, 'validation_output.txt')
+    with open(output_file_path, 'w') as f:
+        f.write(output_string)
 
 if __name__ == "__main__":
     main()
