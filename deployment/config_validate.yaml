@@ -1,14 +1,14 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_validate
 display_name: CV Model Validation
-version: 12
+version: 13
 type: command
 inputs:
   input_dir:
-    type: uri_folder
+    type: string
 outputs:
   output_dir:
-    type: uri_folder
+    type: string
 code: ../src
 environment: azureml:env-validate@latest
 command: >
