@@ -4,7 +4,7 @@ display_name: CV Model Inference
 version: 8
 type: command
 inputs:
-  input_data_path:
+  input_dir:
     type: uri_folder
 outputs:
   output_dir:
@@ -13,5 +13,5 @@ code: ../src
 environment: azureml:env-inference@latest
 command: >
   python src/components/cv_model_inference.py
-  --input_data_path ${{inputs.input_data_path}}
+  --input_dir ${{inputs.input_dir}}
   --output_dir ${{outputs.output_dir}}

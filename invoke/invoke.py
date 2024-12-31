@@ -29,7 +29,7 @@ def invoke_batch_endpoint():
     # Define the input data
     input_data = Input(
         type="uri_folder",  # Adjusted to uri_folder since component expects a folder
-        path="azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspacefilestore/paths/",  # Directory containing your data
+        path="https://mldummyquaoutputssta.blob.core.windows.net/cv-outputs",  # Directory containing your data
     )
 
     # Specify the output location
