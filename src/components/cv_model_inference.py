@@ -6,7 +6,7 @@ def main():
     from utils.prompts import UTILS_PROMPT
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_data_path', type=str, required=True)
+    parser.add_argument('--input_dir', type=str, required=True)
     parser.add_argument('--output_dir', type=str, required=True)
     args = parser.parse_args()
 
