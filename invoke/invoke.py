@@ -29,13 +29,13 @@ def invoke_batch_endpoint():
     # Define the input data
     input_data = Input(
         type="uri_folder",  # Adjusted to uri_folder since component expects a folder
-        path="https://raw.githubusercontent.com/datasets/covid-19/main/data/",  # Directory containing your data
+        path="https://mldummyquasta.blob.core.windows.net/azureml-blobstore-7261293f-0cf9-4460-bcc0-42fd75d237c1/LocalUpload/",  # Directory containing your data
     )
 
     # Specify the output location
     output_data = Output(
         type="uri_folder",
-        path="azureml://datastores/workspaceblobstore/paths/output_path/"
+        path="https://mldummyquasta.blob.core.windows.net/azureml-blobstore-7261293f-0cf9-4460-bcc0-42fd75d237c1/LocalUpload/"
     )
 
     job = ml_client.batch_endpoints.invoke(

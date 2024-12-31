@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_validate
 display_name: CV Model Validation
-version: 10
+version: 11
 type: command
 inputs:
   input_dir:
