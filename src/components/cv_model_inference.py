@@ -10,22 +10,22 @@ def main():
     parser.add_argument('--output_dir', type=str, required=True)
     args = parser.parse_args()
 
-    input_data_path = args.input_data_path
+    input_dir = args.input_dir
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
 
     print("Running model inference...")
-    print(f"Input data path: {input_data_path}")
+    print(f"Input data path: {input_dir}")
     print(UTILS_CONST)
     print(UTILS_PROMPT)
     utils_fun()
 
     # Read the validation output string from the file
-    input_file = os.path.join(input_data_path, "validation_output.txt")
-    with open(input_file, "r") as f:
+    input_file = os.path.join(input_dir, 'validation_output.txt')
+    with open(input_file, 'r') as f:
         validation_output = f.read()
-    print(f"Validation output received: {validation_output}")
 
+    print(f"Validation output received: {validation_output}")
 
 if __name__ == "__main__":
     main()

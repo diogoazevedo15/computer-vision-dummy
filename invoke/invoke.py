@@ -29,7 +29,7 @@ def invoke_batch_endpoint():
     # Define the input data
     input_data = Input(
         type="uri_folder",  # Adjusted to uri_folder since component expects a folder
-        path="https://mldummyquaoutputssta.blob.core.windows.net/cv-outputs",  # Directory containing your data
+        path="https://raw.githubusercontent.com/datasets/covid-19/main/data/",  # Directory containing your data
     )
 
     # Specify the output location
