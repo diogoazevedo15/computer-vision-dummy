@@ -2,12 +2,12 @@ $schema: https://azuremlschemas.azureedge.net/latest/PipelineComponent.schema.js
 type: pipeline
 name: cv_pipeline_updated
 display_name: CV Pipeline Updated
-version: 26
+version: 27
 
 # Component-level inputs
 inputs:
   input_url:
-    type: string
+    type: uri_folder
     description: "Input data url where the data will be downloaded from."
 
 outputs:

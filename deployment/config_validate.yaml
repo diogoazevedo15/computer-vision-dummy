@@ -1,13 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_validate
 display_name: CV Model Validation
-version: 26
+version: 27
 type: command
 inputs:
   input_url:
-    type: string
-    optional: false  # Ensures it's required
-    default: "PLACEHOLDER"
+    type: uri_folder
 outputs:
   output_url:
     type: uri_folder
