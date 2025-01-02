@@ -29,13 +29,13 @@ def invoke_batch_endpoint():
     # Define the input data
     input_data = Input(
         type="uri_folder",  # Adjusted to uri_folder since component expects a folder
-        path="https://mldummyquaoutputsta.blob.core.windows.net/cv-inputs-container",
+        path="azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspaceblobstore/paths/LocalUpload/",
     )
 
     # Specify the output location
     output_data = Output(
         type="uri_folder",
-        path="https://mldummyquaoutputsta.blob.core.windows.net/cv-outputs"
+        path="https://mldummyquaoutputsta.blob.core.windows.net/cv-outputs/"
     )
 
     job = ml_client.batch_endpoints.invoke(
