@@ -2,12 +2,13 @@ import os
 import uuid
 from dotenv import load_dotenv
 from azure.identity import ClientSecretCredential
-from azure.ai.ml import MLClient, Input, Output
+from azure.ai.ml import MLClient, Input
 
 load_dotenv()
 
 endpoint_name = "cv-batch-endpoint"
-input_data_url = "https://raw.githubusercontent.com/datasets/covid-19/main/data/countries-aggregated.csv"
+input_data_url = "azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspaceblobstore/paths/LocalUpload/"
+datastore_path = "azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspaceblobstore/paths/LocalUpload/"
 
 credential = ClientSecretCredential(
     tenant_id=os.getenv("AZURE_TENANT_ID"),
@@ -26,13 +27,15 @@ def invoke_batch_endpoint():
     job_name = f"batch-job-{uuid.uuid4()}"
     print(f"Submitting batch job '{job_name}' to endpoint '{endpoint_name}'...")
 
+    # Define inputs
     inputs = {
-        'input_url': input_data_url,
+        'input_url': Input(type="uri_folder", path=datastore_path),  # String input
+        'output_url': Input(type="uri_folder", path=datastore_path)  # Datastore input
     }
 
     job = ml_client.batch_endpoints.invoke(
         endpoint_name=endpoint_name,
-        inputs={'input_dir': inputs},
+        inputs=inputs,  # Pass the inputs dictionary
         job_name=job_name
     )
 
