@@ -4,10 +4,10 @@ display_name: CV Model Validation
 version: 22
 type: command
 inputs:
-  input_dir:
-    type: uri_folder
+  input_url:
+    type: string
 outputs:
-  output_dir:
+  output_url:
     type: uri_folder
 code: ../src
 environment: azureml:env-validate@latest

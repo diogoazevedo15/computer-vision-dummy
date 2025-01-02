@@ -4,10 +4,10 @@ display_name: CV Model Inference
 version: 22
 type: command
 inputs:
-  input_dir:
+  output_url:
     type: uri_folder
 outputs:
-  output_dir:
+  output_url:
     type: uri_folder
 code: ../src
 environment: azureml:env-inference@latest
