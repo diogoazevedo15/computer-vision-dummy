@@ -10,8 +10,8 @@ def main():
     parser.add_argument('--output_url', type=str, required=True)
     args = parser.parse_args()
 
-    input_dir = args.input_dir
-    output_dir = args.output_dir
+    input_dir = args.input_url
+    output_dir = args.output_url
 
     print("Running model inference...")
     print(UTILS_CONST)
@@ -20,7 +20,7 @@ def main():
     print(f'Input dir: {input_dir}')
     print(f'Output dir: {output_dir}')
 
-    with open((Path(args.input_dir) / "inference.txt"), "a") as f:
+    with open((Path(args.output_dir) / "inference.txt"), "a") as f:
         f.write("Inference step ran successfully")
 
 if __name__ == "__main__":
