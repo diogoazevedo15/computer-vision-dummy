@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_inference
 display_name: CV Model Inference
-version: 20
+version: 21
 type: command
 inputs:
   input_dir:
@@ -12,6 +12,6 @@ outputs:
 code: ../src
 environment: azureml:env-inference@latest
 command: >
-  python src/components/cv_model_inference.py
+  python components/cv_model_inference.py
   --input_dir ${{inputs.input_dir}}
   --output_dir ${{outputs.output_dir}}
