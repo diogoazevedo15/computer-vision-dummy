@@ -29,7 +29,7 @@ def invoke_batch_endpoint():
 
     # Define inputs
     inputs = {
-        'input_url': Input(type="uri_folder", path=datastore_path),  # String input
+        'input_url': Input(type="uri_folder", path=datastore_path),  # Datastore input
         'output_url': Input(type="uri_folder", path=datastore_path)  # Datastore input
     }
 
