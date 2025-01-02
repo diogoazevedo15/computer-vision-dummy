@@ -10,17 +10,15 @@ def main():
     parser.add_argument('--output_url', type=str, required=True)
     args = parser.parse_args()
 
-    input_dir = args.input_url
-    output_dir = args.output_url
 
     print("Running model validation...")
     print(UTILS_CONST)
     print(UTILS_PROMPT)
     utils_fun()
-    print(f'Input dir: {input_dir}')
-    print(f'Output dir: {output_dir}')
+    print(f'Input dir: {args.input_url}')
+    print(f'Output dir: {args.output_url}')
 
-    with open((Path(args.output_dir) / "validate.txt"), "a") as f:
+    with open((Path(args.output_url) / "validate.txt"), "a") as f:
         f.write("Validation step ran successfully")
 
 if __name__ == "__main__":
