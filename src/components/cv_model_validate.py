@@ -20,7 +20,7 @@ def main():
     print(f'Input dir: {input_dir}')
     print(f'Output dir: {output_dir}')
 
-    with open((Path(args.score_report) / "validate.txt"), "a") as f:
+    with open((Path(args.output_dir) / "validate.txt"), "a") as f:
         f.write("Validation step ran successfully")
 
 if __name__ == "__main__":
