@@ -6,29 +6,28 @@ version: 22
 
 # Component-level inputs
 inputs:
-  input_dir:
-    type: uri_folder
-    description: "Input data directory"
+  input_url:
+    type: string
+    description: "Input data url where the data will be downloaded from."
 
-# Component-level outputs
 outputs:
-  output_dir:
-    type: uri_folder
-    description: "Output data directory"
+  output_url:
+    mode: rw_mount
+    description: "Where we will write our files."
 
 jobs:
   validation_step:
     type: command
     component: azureml:cv_model_validate@latest
     inputs:
-      input_dir: ${{ parent.inputs.input_dir }}
+      input_url: ${{ parent.inputs.input_url }}
     outputs:
-      output_dir:  # Make sure this is specified if required
+      output_url:  ${{ parent.outputs.output_url }}
 
   inference_step:
     type: command
     component: azureml:cv_model_inference@latest
     inputs:
-      input_dir: ${{ parent.jobs.validation_step.outputs.output_dir }}  # Link output to input
+      output_url: ${{ parent.jobs.validation_step.output_url }}
     outputs:
-      output_dir: ${{ parent.outputs.output_dir }}
+      output_url:  ${{ parent.outputs.output_url }}

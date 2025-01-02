@@ -1,12 +1,13 @@
 def main():
     import argparse
+    from pathlib import Path
     from utils.functions import utils_fun
     from utils.constants import UTILS_CONST
     from utils.prompts import UTILS_PROMPT
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_dir', type=str, required=True)
-    parser.add_argument('--output_dir', type=str, required=True)
+    parser.add_argument('--input_url', type=str, required=True)
+    parser.add_argument('--output_url', type=str, required=True)
     args = parser.parse_args()
 
     input_dir = args.input_dir
@@ -18,6 +19,9 @@ def main():
     utils_fun()
     print(f'Input dir: {input_dir}')
     print(f'Output dir: {output_dir}')
+
+    with open((Path(args.score_report) / "validate.txt"), "a") as f:
+        f.write("Validation step ran successfully")
 
 if __name__ == "__main__":
     main()
