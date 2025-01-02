@@ -10,8 +10,8 @@ def main():
     parser.add_argument('--output_url', type=str, required=True)
     args = parser.parse_args()
 
-    input_dir = args.input_dir
-    output_dir = args.output_dir
+    input_dir = args.input_url
+    output_dir = args.output_url
 
     print("Running model validation...")
     print(UTILS_CONST)
