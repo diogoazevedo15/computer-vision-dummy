@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineComponentBatchDeployment.schema.json
 name: cv-deployment-gitaction-updated
 description: Deployment made trough gitactions
-endpoint_name: cv-batch-endpoint
+endpoint_name: cv-batch-endpoint-updated
 type: pipeline
 component: azureml:cv_pipeline_updated@latest
 settings:
