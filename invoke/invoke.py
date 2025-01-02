@@ -6,7 +6,7 @@ from azure.ai.ml import MLClient, Input
 
 load_dotenv()
 
-endpoint_name = "cv-batch-endpoint"
+endpoint_name = "cv-batch-endpoint-updated"
 input_data_url = "azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspaceblobstore/paths/LocalUpload/"
 datastore_path = "azureml://subscriptions/2a4f4e29-3789-4e47-867d-62a6eb17950b/resourcegroups/ml-dummy-qua-rg/workspaces/ml-dummy-qua-mlws/datastores/workspaceblobstore/paths/LocalUpload/"
 
@@ -30,7 +30,7 @@ def invoke_batch_endpoint():
     # Define inputs
     inputs = {
         'input_url': Input(type="uri_folder", path=datastore_path),  # Datastore input
-        'output_url': Input(type="uri_folder", path=datastore_path)  # Datastore input
+        # 'output_url': Input(type="uri_folder", path=datastore_path)  # Datastore input
     }
 
     job = ml_client.batch_endpoints.invoke(
