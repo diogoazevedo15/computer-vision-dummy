@@ -1,5 +1,4 @@
 def main():
-    import os
     import argparse
     from utils.functions import utils_fun
     from utils.constants import UTILS_CONST

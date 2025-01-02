@@ -10,7 +10,7 @@ def main():
     args = parser.parse_args()
 
     input_dir = args.input_dir
-    output_dir = args.output_dir  # Ensure the output directory exists
+    output_dir = args.output_dir
 
     print("Running model validation...")
     print(UTILS_CONST)
