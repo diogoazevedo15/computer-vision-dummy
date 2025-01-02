@@ -6,6 +6,7 @@ def main():
     from utils.prompts import UTILS_PROMPT
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('--input_url', type=str, required=True)
     parser.add_argument('--output_url', type=str, required=True)
     args = parser.parse_args()
 
@@ -19,7 +20,7 @@ def main():
     print(f'Input dir: {input_dir}')
     print(f'Output dir: {output_dir}')
 
-    with open((Path(args.score_report) / "validate.txt"), "a") as f:
+    with open((Path(args.input_dir) / "inference.txt"), "a") as f:
         f.write("Inference step ran successfully")
 
 if __name__ == "__main__":
