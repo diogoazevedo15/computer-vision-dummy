@@ -6,6 +6,8 @@ type: command
 inputs:
   input_url:
     type: string
+    optional: false  # Ensures it's required
+    default: "PLACEHOLDER"
 outputs:
   output_url:
     type: uri_folder
