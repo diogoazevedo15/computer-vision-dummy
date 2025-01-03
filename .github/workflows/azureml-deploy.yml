@@ -19,7 +19,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
+      - name: Cache Azure CLI
+        uses: actions/cache@v3
+        with:
+          path: ~/.azure-cli
+          key: azure-cli-${{ runner.os }}-${{ hashFiles('**/*') }}
+          restore-keys: |
+            azure-cli-${{ runner.os }}-
+
       - name: Install Azure CLI
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
@@ -33,7 +42,16 @@ jobs:
       - name: Set Azure subscription
         run: az account set --subscription $AZURE_SUBSCRIPTION_ID
 
+      - name: Cache Azure ML CLI extension
+        uses: actions/cache@v3
+        with:
+          path: ~/.azure
+          key: azure-ml-cli-${{ runner.os }}-${{ hashFiles('**/*') }}
+          restore-keys: |
+            azure-ml-cli-${{ runner.os }}-
+
       - name: Install Azure ML CLI extension
+        if: steps.cache.outputs.cache-hit != 'true'
         run: az extension add -n ml --yes
 
       - name: Configure defaults
