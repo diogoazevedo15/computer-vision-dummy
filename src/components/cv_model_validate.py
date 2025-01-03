@@ -21,7 +21,5 @@ def main():
     with open((Path(args.output_url) / "validate.txt"), "a") as f:
         f.write("Validation step ran successfully")
 
-
-    print('hello')
 if __name__ == "__main__":
     main()
