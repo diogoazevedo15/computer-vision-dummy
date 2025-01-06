@@ -21,22 +21,31 @@ This repository demonstrates how to set up a simple Azure Machine Learning (Azur
 
 ## Repository Structure
 
+
+## Repository Structure
+
 ```
-.
 ├── .github
-│   └── workflows
-│       └── azureml-deploy.yml
-├── deploy
-│   ├── endpoint.yaml
-│   ├── deployment.yaml
-│   ├── environment.yaml
-│   └── score.py
-├── invoke
-│   └── invoke.py
+│ └── workflows
+│ └── azureml-deploy.yml
+├── deployment
+│ ├── batch_deployment.yaml
+│ ├── endpoint.yaml
+│ ├── environments
+│ │ ├── env_validate.yaml
+│ │ └── env_inference.yaml
+│ ├── components
+│ │ ├── config_validate.yaml
+│ │ └── config_inference.yaml
+│ └── pipeline.yaml
+└── src
+├── components
+│ ├── cv_model_validate.py
+│ └── cv_model_inference.py
 ```
 
-markdown
-Copy code
+### File Descriptions
+
 
 ### File Descriptions
 
@@ -45,37 +54,26 @@ This GitHub Actions workflow is triggered when changes are pushed to the `qua` b
 - Installs the Azure CLI and Azure ML CLI extension.  
 - Authenticates using the service principal credentials stored as GitHub Secrets.  
 - Sets the default subscription, resource group, and workspace.  
-- Creates or updates the Azure ML environment, batch endpoint, and batch deployment.  
+- Creates or updates the Azure ML environments, components, pipeline, batch endpoint, and batch deployment.  
 - Sets the default deployment for the endpoint.
 
-**`deploy/endpoint.yaml`**  
+**`deployment/endpoint.yaml`**  
 Defines the Azure ML batch endpoint resource. It specifies the endpoint’s name and authentication mode. The endpoint is a logical concept that provides an entry point for submitting batch inference requests.
 
-**`deploy/deployment.yaml`**  
+**`deployment/batch_deployment.yaml`**  
 Defines the batch deployment associated with the endpoint. It includes details such as:  
 - The compute target (where the batch job runs).  
 - The environment (runtime environment with libraries and dependencies).  
-- The scoring script and other code artifacts.  
-- The output file name for inference results.
+- The component to be used for the deployment.
 
-**`deploy/environment.yaml`**  
-Specifies the environment for running the batch inference. This includes the Docker base image, Python version, and necessary packages (`azureml-defaults`, etc.). Once created, this environment is referenced in the deployment.
+**`deployment/environments/env_validate.yaml`** and **`deployment/environments/env_inference.yaml`**  
+Specify the environments for running the batch inference and validation. These include the Docker base image, Python version, and necessary packages (`azureml-defaults`, etc.). Once created, these environments are referenced in the components.
 
-**`deploy/score.py`**  
-A simple scoring script that defines how the batch job processes input data and generates output predictions. In this example, it just returns a static "Hello world" message or a dummy output, serving as a placeholder for a real model inference logic.
+**`deployment/components/config_validate.yaml`** and **`deployment/components/config_inference.yaml`**  
+Define the command components for model validation and inference. They specify the inputs, outputs, environment, and command to be executed.
 
-**`invoke/invoke.py`**  
-A simple python script that invokes the batch endpoint deployed.
-To run this scrit add an .env file to this folder with:
-```env
-AZURE_CLIENT_ID=<service-principal-appid>
-AZURE_TENANT_ID=<your-tenant-id>
-AZURE_CLIENT_SECRET=<service-principal-password>
-
-AZURE_SUBSCRIPTION_ID=<your-subscription-id>
-AZURE_RESOURCE_GROUP=<your-resource-group>
-AZURE_WORKSPACE_NAME=<your-workspace-name>
-```
+**`deployment/pipeline.yaml`**  
+Defines the pipeline that orchestrates the validation and inference steps. It specifies the inputs, outputs, and the sequence of jobs to be executed.
 
 ## GitHub Actions Workflow Overview
 
@@ -84,11 +82,12 @@ The `azureml-deploy.yml` workflow automates the entire deployment process:
 2. **Authentication**: Uses the service principal credentials provided as GitHub Secrets to authenticate with Azure.  
 3. **Configuration**: Sets the default subscription, resource group, and workspace context.  
 4. **Environment & Endpoint Creation**:  
-   - Creates/updates the environment defined by `environment.yaml`.  
-   - Creates/updates the endpoint defined by `endpoint.yaml`.  
-   - Creates/updates the batch deployment defined by `deployment.yaml`.  
+   - Creates/updates the environments defined by `env_validate.yaml` and `env_inference.yaml`.  
+   - Creates/updates the components defined by `config_validate.yaml` and `config_inference.yaml`.  
+   - Creates/updates the pipeline defined by `pipeline.yaml`.  
+   - Creates/updates the batch endpoint and deployment defined by `endpoint.yaml` and `batch_deployment.yaml`.  
    - Sets the default deployment for the endpoint.
-   
+
 This workflow ensures that whenever code is merged into the `qua` branch, the latest configurations and code changes are automatically deployed to your Azure ML workspace.
 
 ## Next Steps
@@ -97,4 +96,4 @@ This workflow ensures that whenever code is merged into the `qua` branch, the la
    Consider caching the Azure CLI and Azure ML CLI extension installations to speed up the CI/CD process. This can be done using GitHub Actions cache keys and steps to reduce build time.
 
 2. **Labels and Tags**:  
-   Explore using Git tags, labels, or branches to segment your CI/CD pi
+   Explore using Git tags, labels, or branches to segment your CI/CD pipeline and manage different deployment environments or versions.
