@@ -5,7 +5,7 @@ This repository demonstrates how to set up a simple Azure Machine Learning (Azur
 ## Prerequisites
 
 1. **Azure Service Principal (Service Account)**:  
-   To automate resource creation and updates, you need a service principal with the appropriate permissions (e.g., `Contributor` role on the subscription or resource group).  
+   To automate resource creation and updates, you need a service principal with the appropriate permissions (e.g., `Contributor` role on the workspace scope).  
    This allows GitHub Actions to authenticate and interact with your Azure ML workspace without exposing user credentials.
 
 2. **GitHub Secrets**:  
@@ -18,9 +18,6 @@ This repository demonstrates how to set up a simple Azure Machine Learning (Azur
    - **AZURE_WORKSPACE_NAME**: The name of your Azure ML workspace.
 
    These secrets allow the GitHub Actions workflow to log in, set the subscription, and apply changes in your Azure environment.
-
-## Repository Structure
-
 
 ## Repository Structure
 
