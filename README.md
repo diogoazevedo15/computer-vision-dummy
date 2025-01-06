@@ -92,8 +92,8 @@ This workflow ensures that whenever code is merged into the `qua` branch, the la
 
 ## Next Steps
 
-1. **Caching the CLI Tools**:  
-   Consider caching the Azure CLI and Azure ML CLI extension installations to speed up the CI/CD process. This can be done using GitHub Actions cache keys and steps to reduce build time.
+1. **Caching the CLI Tools**: (DONE ✅)
+   Consider caching the Azure CLI and Azure ML CLI extension installations to speed up the CI/CD process. This can be done using GitHub Actions cache keys and steps to reduce build time. 
 
 2. **Labels and Tags**:  
    Explore using Git tags, labels, or branches to segment your CI/CD pipeline and manage different deployment environments or versions.
