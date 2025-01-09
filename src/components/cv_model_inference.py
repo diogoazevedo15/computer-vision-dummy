@@ -20,5 +20,7 @@ def main():
     with open((Path(args.output_url) / "inference.txt"), "a") as f:
         f.write("Inference step ran successfully")
 
+    print('Test change')
+
 if __name__ == "__main__":
     main()
