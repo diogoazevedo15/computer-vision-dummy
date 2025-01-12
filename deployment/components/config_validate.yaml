@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: cv_model_validate
 display_name: CV Model Validation
-version: 33
+version: 35
 type: command
 inputs:
   input_url:
@@ -15,3 +15,5 @@ command: >
   python components/cv_model_validate.py
   --input_url ${{inputs.input_url}}
   --output_url ${{outputs.output_url}}
+additional_includes:
+ - ../../global_test.txt
