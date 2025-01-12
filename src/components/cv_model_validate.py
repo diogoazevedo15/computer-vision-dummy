@@ -20,6 +20,7 @@ def main():
 
     with open((Path(args.output_url) / "validate.txt"), "a") as f:
         f.write("Validation step ran successfully")
+    print("global_test")
 
 if __name__ == "__main__":
     main()
