@@ -25,16 +25,18 @@ This repository demonstrates how to set up a simple Azure Machine Learning (Azur
 ├── .github
 │ └── workflows
 │ └── azureml-deploy.yml
+├── tests
+│ ├── repo_tests
+│ ├── endpoint
 ├── deployment
 │ ├── batch_deployment.yaml
-│ ├── endpoint.yaml
 │ ├── environments
 │ │ ├── env_validate.yaml
 │ │ └── env_inference.yaml
 │ ├── components
 │ │ ├── config_validate.yaml
 │ │ └── config_inference.yaml
-│ └── pipeline.yaml
+│ │ └── pipeline.yaml
 └── src
 ├── components
 │ ├── cv_model_validate.py
